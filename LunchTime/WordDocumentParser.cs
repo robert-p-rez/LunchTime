@@ -26,7 +26,7 @@ namespace LunchTime
             Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
             for (int i = 0; i < docs.Paragraphs.Count; i++)
             {
-                fileText[i] = docs.Paragraphs[i + 1].Range.Text.ToString();
+                fileText.Add(docs.Paragraphs[i + 1].Range.Text.ToString());
             }
             docs.Close();
             word.Quit();
