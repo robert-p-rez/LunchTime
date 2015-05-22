@@ -11,17 +11,13 @@ namespace LunchTime
     {
         static void Main(string[] args)
         {
-            StreamWriter fileWriter = new StreamWriter(@"C:\temp\test.txt");
             WordDocumentParser parser = new WordDocumentParser();
             parser.ReadFile(IntergraphFileCreator.CurrentWeekFile());
             foreach (string line in parser.GetDaysMenu(DateTime.Now.DayOfWeek))
             {
-                fileWriter.WriteLine(line);
                 Console.WriteLine(line);
             }
-            fileWriter.Close();
-            Console.ReadLine();
-            //MessageBox.Show(todaysMenuString);
+            Console.ReadKey();
         }
 
         
