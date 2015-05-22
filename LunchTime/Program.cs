@@ -10,6 +10,10 @@ namespace LunchTime
     {
         static void Main(string[] args)
         {
+            string menu = WordDocumentParser.ReadFile("http://305.intergraph.com/wp-content/uploads/2015/05/Megabytes-5-24-15.docx");
+            //MessageBox.Show(todaysMenuString);
         }
+
+        
     }
 }
