@@ -15,7 +15,11 @@ namespace LunchTime
             parser.ReadFile(IntergraphFileCreator.CurrentWeekFile());
             foreach (string line in parser.GetDaysMenu(DateTime.Now.DayOfWeek))
             {
-                Console.WriteLine(line);
+                Console.WriteLine(line.Trim());
+                if (line.EndsWith("Y") || line.EndsWith("9"))
+                {
+                    Console.WriteLine();
+                }
             }
             Console.ReadKey();
         }

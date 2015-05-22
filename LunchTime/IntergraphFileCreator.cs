@@ -37,6 +37,9 @@ namespace LunchTime
                 case DayOfWeek.Tuesday:
                     today = today.AddDays(+5);
                     break;
+                case DayOfWeek.Monday:
+                    today = today.AddDays(+6);
+                    break;
                 default:
                     break;
             }
