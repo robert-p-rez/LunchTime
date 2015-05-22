@@ -26,16 +26,16 @@ namespace LunchTime
                 case DayOfWeek.Sunday:
                     throw new NotImplementedException();
                 case DayOfWeek.Friday:
-                    today = today.AddDays(-4);
+                    today = today.AddDays(+2);
                     break;
                 case DayOfWeek.Thursday:
-                    today = today.AddDays(-3);
+                    today = today.AddDays(+3);
                     break;
                 case DayOfWeek.Wednesday:
-                    today = today.AddDays(-2);
+                    today = today.AddDays(+4);
                     break;
                 case DayOfWeek.Tuesday:
-                    today = today.AddDays(-1);
+                    today = today.AddDays(+5);
                     break;
                 default:
                     break;
