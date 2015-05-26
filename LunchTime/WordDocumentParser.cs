@@ -19,23 +19,32 @@ namespace LunchTime
         //code copied from http://mantascode.com/c-how-to-parse-the-text-content-from-microsoft-word-document/
         public void ReadFile(string filePath)
         {
-            if (!File.Exists(filePath))
+            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+            Microsoft.Office.Interop.Word.Document docs = null;
+            //word.Visible = false;
+            object miss = System.Reflection.Missing.Value;
+            object path = filePath;
+            object readOnly = true;
+            try
             {
-                throw new MenuNotFoundException();
-            }
-                Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
-                //word.Visible = false;
-                object miss = System.Reflection.Missing.Value;
-                object path = filePath;
-                object readOnly = true;
-                Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
                 for (int i = 0; i < docs.Paragraphs.Count; i++)
                 {
                     fileText.Add(docs.Paragraphs[i + 1].Range.Text.ToString());
                 }
-                docs.Close();
+            }
+            catch
+            {
+                throw new MenuNotFoundException();
+            }
+            finally
+            {
+                if (docs != null)
+                {
+                    docs.Close();
+                }
                 word.Quit();
-            
+            }
         }
 
         public List<String> GetAllFileText()
@@ -60,7 +69,7 @@ namespace LunchTime
                 }
                 if (startedReading && !string.IsNullOrWhiteSpace(line) && line != "\r\a")
                 {
-                    lines.Add(line.Replace("\r\a",""));
+                    lines.Add(line.Replace("\r\a", ""));
                 }
             }
 
@@ -79,6 +88,6 @@ namespace LunchTime
             return false;
         }
 
-        
+
     }
 }
