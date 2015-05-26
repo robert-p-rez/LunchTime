@@ -24,7 +24,7 @@ namespace LunchTime
             {
                 case DayOfWeek.Saturday:
                 case DayOfWeek.Sunday:
-                    throw new NotImplementedException();
+                    throw new NotServingException();
                 case DayOfWeek.Friday:
                     today = today.AddDays(+2);
                     break;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,18 +19,23 @@ namespace LunchTime
         //code copied from http://mantascode.com/c-how-to-parse-the-text-content-from-microsoft-word-document/
         public void ReadFile(string filePath)
         {
-            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
-            //word.Visible = false;
-            object miss = System.Reflection.Missing.Value;
-            object path = filePath;
-            object readOnly = true;
-            Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-            for (int i = 0; i < docs.Paragraphs.Count; i++)
+            if (!File.Exists(filePath))
             {
-                fileText.Add(docs.Paragraphs[i + 1].Range.Text.ToString());
+                throw new MenuNotFoundException();
             }
-            docs.Close();
-            word.Quit();
+                Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
+                //word.Visible = false;
+                object miss = System.Reflection.Missing.Value;
+                object path = filePath;
+                object readOnly = true;
+                Microsoft.Office.Interop.Word.Document docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                for (int i = 0; i < docs.Paragraphs.Count; i++)
+                {
+                    fileText.Add(docs.Paragraphs[i + 1].Range.Text.ToString());
+                }
+                docs.Close();
+                word.Quit();
+            
         }
 
         public List<String> GetAllFileText()
