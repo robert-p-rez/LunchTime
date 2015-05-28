@@ -19,6 +19,31 @@ namespace LunchTime
         //code copied from http://mantascode.com/c-how-to-parse-the-text-content-from-microsoft-word-document/
         public void ReadFile(string filePath)
         {
+            if (DoesCurrentCacheExist(filePath))
+            {
+                ParseCache();
+            }
+            else
+            {
+                ParseWithWord(filePath);
+            }
+        }
+ 
+        private void ParseCache()
+        {
+            StreamReader reader = new StreamReader(Path.GetTempPath() + "LunchTimeMenu.txt");
+            reader.ReadLine();
+            while (!reader.EndOfStream)
+            {
+                fileText.Add(reader.ReadLine());
+            }
+            reader.Close();
+        }
+
+        private void ParseWithWord(string filePath)
+        {
+            StreamWriter writer = new StreamWriter(Path.GetTempPath() + @"LunchTimeMenu.txt");
+            writer.WriteLine(filePath);
             Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
             Microsoft.Office.Interop.Word.Document docs = null;
             //word.Visible = false;
@@ -30,7 +55,9 @@ namespace LunchTime
                 docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
                 for (int i = 0; i < docs.Paragraphs.Count; i++)
                 {
-                    fileText.Add(docs.Paragraphs[i + 1].Range.Text.ToString());
+                    string item= docs.Paragraphs[i + 1].Range.Text.ToString();
+                    fileText.Add(item);
+                    writer.WriteLine(item);
                 }
             }
             catch
@@ -39,12 +66,31 @@ namespace LunchTime
             }
             finally
             {
+                writer.Flush();
+                writer.Close();
                 if (docs != null)
                 {
                     docs.Close();
                 }
                 word.Quit();
             }
+        }
+
+        private bool DoesCurrentCacheExist(string filepath)
+        {
+            bool exists = false;
+            if (!File.Exists(Path.GetTempPath() + "LunchTimeMenu.txt"))
+            {
+                return exists;
+            }
+
+            StreamReader fileReader = new StreamReader(Path.GetTempPath() + "LunchTimeMenu.txt");
+            if (fileReader.ReadLine() == filepath)
+            {
+                exists = !exists;
+            }
+            fileReader.Close();
+            return exists;
         }
 
         public List<String> GetAllFileText()
@@ -67,7 +113,7 @@ namespace LunchTime
                 {
                     startedReading = false;
                 }
-                if (startedReading && !string.IsNullOrWhiteSpace(line) && line != "\r\a")
+                if (startedReading && !string.IsNullOrWhiteSpace(line) && line != "\r\a" && line != "\a")
                 {
                     lines.Add(line.Replace("\r\a", ""));
                 }
