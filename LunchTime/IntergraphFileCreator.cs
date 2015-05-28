@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +14,7 @@ namespace LunchTime
         //Should return filepath like "http://305.intergraph.com/wp-content/uploads/2015/05/Megabytes-5-24-15.docx" based on the current date
         public static string CurrentWeekFile()
         {
-            return "http://305.intergraph.com/wp-content/uploads/2015/05/Megabytes-" + MakeDate() + ".docx";
+            return ParseHTMLLink();
         }
 
         private static string MakeDate()
@@ -42,7 +44,25 @@ namespace LunchTime
                 default:
                     break;
             }
-            return today.Month.ToString() + "-" + today.Day.ToString() + "-" + today.Year.ToString().Remove(0,2);
+            return today.Month.ToString() + "-" + today.Day.ToString() + "-" + today.Year.ToString().Remove(0, 2);
+        }
+
+        private static string ParseHTMLLink()
+        {
+            WebRequest req = HttpWebRequest.Create("http://305.intergraph.com/?page_id=796");
+            req.Method = "GET";
+
+            string html;
+            using (StreamReader reader = new StreamReader(req.GetResponse().GetResponseStream()))
+            {
+                html = reader.ReadToEnd();
+            }
+            foreach (string item in html.Split('\"'))
+            {
+                if (item.Contains("Megabytes") && item.Contains("http://305.intergraph.com/wp-content"))
+                    return item;
+            }
+            return "";
         }
     }
 }
