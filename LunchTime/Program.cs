@@ -11,6 +11,15 @@ namespace LunchTime
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("       __________________");
+            Console.WriteLine("   _.-\", ,' .'. ,  `. .  \"-._");
+            Console.WriteLine(" .'. `    .    ,  `  .  ' '  `.");
+            Console.WriteLine(".`____________________________'.");
+            Console.WriteLine("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+            Console.WriteLine("`\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"'");
+            Console.WriteLine(" `____________________________'");
+            Console.WriteLine("\n\nDOWNLOADING MENU... PLZ W8 M8");
+
             WordDocumentParser parser = new WordDocumentParser();
             try
             {
@@ -21,7 +30,9 @@ namespace LunchTime
                 {
                     menuDay = menuDay.AddHours(10);
                 }
-                foreach (string line in parser.GetDaysMenu(menuDay.DayOfWeek))
+                List<String> menu = parser.GetDaysMenu(menuDay.DayOfWeek);
+                Console.Clear();
+                foreach (string line in menu)
                 {
                     Console.WriteLine(line.Trim());
                     if (line.EndsWith("Y") || line.EndsWith("9"))
@@ -38,6 +49,8 @@ namespace LunchTime
             {
                 Console.WriteLine("Megabytes is not open today.");
             }
+
+            Console.WriteLine("Press enter to terminate...");
             Console.ReadKey();
         }
 

@@ -14,7 +14,7 @@ namespace LunchTime
         //Should return filepath like "http://305.intergraph.com/wp-content/uploads/2015/05/Megabytes-5-24-15.docx" based on the current date
         public static string CurrentWeekFile()
         {
-            return ParseHTMLLink();
+            return MakeDate();
         }
 
         private static string MakeDate()
@@ -44,7 +44,7 @@ namespace LunchTime
                 default:
                     break;
             }
-            return today.Month.ToString() + "-" + today.Day.ToString() + "-" + today.Year.ToString().Remove(0, 2);
+            return "http://305.intergraph.com/wp-content/uploads/2015/05/Megabytes-" + today.Month.ToString() + "-" + today.Day.ToString() + "-" + today.Year.ToString().Remove(0, 2)+ ".docx";;
         }
 
         private static string ParseHTMLLink()
