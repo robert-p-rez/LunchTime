@@ -19,7 +19,6 @@ namespace LunchTime
         {
            // string output = 
             DateTime today = DateTime.Now;
-
             switch (today.DayOfWeek)
             {
                 case DayOfWeek.Saturday:

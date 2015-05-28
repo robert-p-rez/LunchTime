@@ -15,14 +15,20 @@ namespace LunchTime
             try
             {
                 parser.ReadFile(IntergraphFileCreator.CurrentWeekFile());
-                 foreach (string line in parser.GetDaysMenu(DateTime.Now.DayOfWeek))
-            {
-                Console.WriteLine(line.Trim());
-                if (line.EndsWith("Y") || line.EndsWith("9"))
+
+                DateTime menuDay = DateTime.Now;
+                if (menuDay.AddHours(10).Date != menuDay.Date)
                 {
-                    Console.WriteLine();
+                    menuDay = menuDay.AddHours(10);
                 }
-            }
+                foreach (string line in parser.GetDaysMenu(menuDay.DayOfWeek))
+                {
+                    Console.WriteLine(line.Trim());
+                    if (line.EndsWith("Y") || line.EndsWith("9"))
+                    {
+                        Console.WriteLine();
+                    }
+                }
             }
             catch (MenuNotFoundException)
             {
@@ -35,6 +41,6 @@ namespace LunchTime
             Console.ReadKey();
         }
 
-        
+
     }
 }
