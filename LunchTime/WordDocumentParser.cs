@@ -100,6 +100,10 @@ namespace LunchTime
 
         public List<string> GetDaysMenu(DayOfWeek theDate)
         {
+            if (theDate == DayOfWeek.Sunday || theDate == DayOfWeek.Saturday)
+            {
+                throw new NotServingException();
+            }
             bool startedReading = false;
             List<string> lines = new List<string>();
 

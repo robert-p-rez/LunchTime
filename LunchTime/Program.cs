@@ -31,7 +31,6 @@ namespace LunchTime
                     menuDay = menuDay.AddHours(10);
                 }
                 List<String> menu = parser.GetDaysMenu(menuDay.DayOfWeek);
-                Console.Clear();
                 foreach (string line in menu)
                 {
                     Console.WriteLine(line.Trim());
@@ -43,13 +42,15 @@ namespace LunchTime
             }
             catch (MenuNotFoundException)
             {
+                Console.Clear();
                 Console.WriteLine("There was an error retrieving the menu.");
             }
             catch (NotServingException)
             {
+                Console.Clear();
                 Console.WriteLine("Megabytes is not open today.");
             }
-
+            Console.WriteLine();
             Console.WriteLine("Press enter to terminate...");
             Console.ReadKey();
         }
