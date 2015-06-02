@@ -23,7 +23,8 @@ namespace LunchTime
             WordDocumentParser parser = new WordDocumentParser();
             try
             {
-                parser.ReadFile(IntergraphFileCreator.CurrentWeekFile());
+                string link = IntergraphFileCreator.CurrentWeekFile();
+                parser.ReadFile(link);
 
                 DateTime menuDay = DateTime.Now;
                 if (menuDay.AddHours(10).Date != menuDay.Date)

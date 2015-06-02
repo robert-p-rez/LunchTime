@@ -14,7 +14,7 @@ namespace LunchTime
         //Should return filepath like "http://305.intergraph.com/wp-content/uploads/2015/05/Megabytes-5-24-15.docx" based on the current date
         public static string CurrentWeekFile()
         {
-            return ParseHTMLLink();
+            return MakeDate();
         }
 
         private static string MakeDate()
@@ -44,18 +44,23 @@ namespace LunchTime
                 default:
                     break;
             }
-            return "http://305.intergraph.com/wp-content/uploads/2015/05/Megabytes-" + today.Month.ToString() + "-" + today.Day.ToString() + "-" + today.Year.ToString().Remove(0, 2)+ ".docx";;
+            return "http://305.intergraph.com/wp-content/uploads/2015/06/Megabytes-" + today.Month.ToString() + "-" + today.Day.ToString() + "-" + today.Year.ToString().Remove(0, 2)+ ".docx";;
         }
 
         private static string ParseHTMLLink()
         {
             WebRequest req = HttpWebRequest.Create("http://305.intergraph.com/?page_id=796");
             req.Method = "GET";
-
             string html;
-            using (StreamReader reader = new StreamReader(req.GetResponse().GetResponseStream()))
+            try
             {
-                html = reader.ReadToEnd();
+                using (StreamReader reader = new StreamReader(req.GetResponse().GetResponseStream()))
+                {
+                    html = reader.ReadToEnd();
+                }
+            }
+            catch {
+                return MakeDate();
             }
             foreach (string item in html.Split('\"'))
             {
