@@ -14,7 +14,7 @@ namespace LunchTime
         //Should return filepath like "http://305.intergraph.com/wp-content/uploads/2015/05/Megabytes-5-24-15.docx" based on the current date
         public static string CurrentWeekFile()
         {
-            return MakeDate();
+            return ParseHTMLLink();
         }
 
         private static string MakeDate()
@@ -62,7 +62,7 @@ namespace LunchTime
             catch {
                 return MakeDate();
             }
-            foreach (string item in html.Split('\"'))
+            foreach (string item in html.Split('\"').Reverse())
             {
                 if (item.Contains("Megabytes") && item.Contains("http://305.intergraph.com/wp-content"))
                     return item;
