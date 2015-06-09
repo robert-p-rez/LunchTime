@@ -17,6 +17,12 @@ namespace LunchTime
             return ParseHTMLLink();
         }
 
+        private static string FilePath()
+        {
+            string filePath = MakeDate();
+            return filePath.Substring(filePath.LastIndexOf("/"));
+        }
+
         private static string MakeDate()
         {
            // string output = 
@@ -62,10 +68,14 @@ namespace LunchTime
             catch {
                 return MakeDate();
             }
-            foreach (string item in html.Split('\"').Reverse())
+
+            foreach (string item in html.Split('\"'))
             {
                 if (item.Contains("Megabytes") && item.Contains("http://305.intergraph.com/wp-content"))
-                    return item;
+                    if (MakeDate() == item)
+                    {
+                        return item;
+                    }
             }
             return "";
         }

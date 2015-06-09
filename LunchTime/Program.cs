@@ -11,6 +11,8 @@ namespace LunchTime
     {
         static void Main(string[] args)
         {
+            int megaBytesCounter = 3;
+
             Console.WriteLine("       __________________");
             Console.WriteLine("   _.-\", ,' .'. ,  `. .  \"-._");
             Console.WriteLine(" .'. `    .    ,  `  .  ' '  `.");
@@ -24,6 +26,10 @@ namespace LunchTime
             try
             {
                 string link = IntergraphFileCreator.CurrentWeekFile();
+                if (string.IsNullOrWhiteSpace(link))
+                {
+                    throw new MenuNotFoundException();
+                }
                 parser.ReadFile(link);
 
                 DateTime menuDay = DateTime.Now;
@@ -45,6 +51,7 @@ namespace LunchTime
             {
                 Console.Clear();
                 Console.WriteLine("There was an error retrieving the menu.");
+                Console.WriteLine("Megabytes has changed their website and broken this app {0} times.", megaBytesCounter);
             }
             catch (NotServingException)
             {
