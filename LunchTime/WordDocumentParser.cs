@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Word;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -44,18 +45,17 @@ namespace LunchTime
         {
             StreamWriter writer = new StreamWriter(Path.GetTempPath() + @"LunchTimeMenu.txt");
             writer.WriteLine(filePath);
-            Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
-            Microsoft.Office.Interop.Word.Document docs = null;
-            //word.Visible = false;
+            _Application word = new Application();
+            _Document doc = null;
             object miss = System.Reflection.Missing.Value;
             object path = filePath;
             object readOnly = true;
             try
             {
-                docs = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
-                for (int i = 0; i < docs.Paragraphs.Count; i++)
+                doc = word.Documents.Open(ref path, ref miss, ref readOnly, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss, ref miss);
+                for (int i = 0; i < doc.Paragraphs.Count; i++)
                 {
-                    string item= docs.Paragraphs[i + 1].Range.Text.ToString();
+                    string item= doc.Paragraphs[i + 1].Range.Text.ToString();
                     fileText.Add(item);
                     writer.WriteLine(item);
                 }
@@ -68,9 +68,9 @@ namespace LunchTime
             {
                 writer.Flush();
                 writer.Close();
-                if (docs != null)
+                if (doc != null)
                 {
-                    docs.Close();
+                    doc.Close(Type.Missing,Type.Missing,Type.Missing);
                 }
                 word.Quit();
             }
@@ -79,18 +79,16 @@ namespace LunchTime
         private bool DoesCurrentCacheExist(string filepath)
         {
             bool exists = false;
+
             if (!File.Exists(Path.GetTempPath() + "LunchTimeMenu.txt"))
             {
                 return exists;
             }
 
-            StreamReader fileReader = new StreamReader(Path.GetTempPath() + "LunchTimeMenu.txt");
-            if (fileReader.ReadLine() == filepath)
+            using (StreamReader fileReader = new StreamReader(Path.GetTempPath() + "LunchTimeMenu.txt"))
             {
-                exists = !exists;
+                return (fileReader.ReadLine() == filepath) ? true : false;
             }
-            fileReader.Close();
-            return exists;
         }
 
         public List<String> GetAllFileText()
