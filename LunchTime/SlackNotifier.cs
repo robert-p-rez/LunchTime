@@ -20,14 +20,7 @@ namespace LunchTime
             }
             catch
             {
-                try
-                {
-                    SendTextToSlack("Someone used lunchtime!");
-                }
-                catch
-                {
-                    //really bad failure :(
-                }
+                SendTextToSlack("Someone used lunchtime!");
             }
         }
 

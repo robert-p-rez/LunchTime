@@ -34,9 +34,12 @@ namespace LunchTime
                 }
                 parser.ReadFile(link);
                 
-            
-                List<String> menu = parser.SmartGetDaysMenu();
-                Console.Clear();
+                DateTime menuDay = DateTime.Now;
+                if (menuDay.AddHours(10).Date != menuDay.Date)
+                {
+                    menuDay = menuDay.AddHours(10);
+                }
+                List<String> menu = parser.GetDaysMenu(menuDay.DayOfWeek);
                 foreach (string line in menu)
                 {
                     Console.WriteLine(line.Trim());

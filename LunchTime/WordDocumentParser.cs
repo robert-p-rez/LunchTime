@@ -124,40 +124,6 @@ namespace LunchTime
             return lines;
         }
 
-        public List<string> SmartGetDaysMenu()
-        {
-            int hour = System.DateTime.Now.Hour;
-            int minute = System.DateTime.Now.Minute;
-
-            List<string> menu;
-            if (hour > 14 || (hour == 13 && minute >= 35))
-            {
-                menu = GetDaysMenu(DateTime.Now.AddHours(14).DayOfWeek);
-            }
-            else
-            {
-                menu = GetDaysMenu(DateTime.Now.DayOfWeek);
-                if (hour == 13 && minute > 5)
-                {
-                    StripClosedStations(ref menu);
-                }
-            }
-
-            return menu;
-        }
-
-        private void StripClosedStations(ref List<String> menu)
-        {
-            for (int i = 0; i < menu.Count; i++)
-            {
-                if (menu[i].Contains("Expo Station") || menu[i].Contains("Deli"))
-                {
-                    for (int j = 0; j < 3; j++ )
-                        menu.RemoveAt(i);
-                }
-            }
-        }
-
         private bool LineContainsAnotherDay(string line, DayOfWeek dayToNotCheckFor)
         {
             foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))

@@ -25,7 +25,7 @@ namespace LunchTime {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("T06FQC8ER/B06GPKLAD/r4oXe2ugNaA9ycWaAtplJhC5")]
+        [global::System.Configuration.DefaultSettingValueAttribute("test")]
         public string URL {
             get {
                 return ((string)(this["URL"]));
