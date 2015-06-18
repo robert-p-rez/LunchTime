@@ -11,6 +11,8 @@ namespace LunchTime
     {
         static void Main(string[] args)
         {
+            SlackNotifier.SendNotification();
+
             int megaBytesCounter = 3;
 
             Console.WriteLine("       __________________");
@@ -31,7 +33,7 @@ namespace LunchTime
                     throw new MenuNotFoundException();
                 }
                 parser.ReadFile(link);
-
+                
                 DateTime menuDay = DateTime.Now;
                 if (menuDay.AddHours(10).Date != menuDay.Date)
                 {
