@@ -13,7 +13,7 @@ namespace LunchTime
         {
             SlackNotifier.SendNotification();
 
-            int megaBytesCounter = 3;
+            int megaBytesCounter = 4;
 
             Console.WriteLine("       __________________");
             Console.WriteLine("   _.-\", ,' .'. ,  `. .  \"-._");
@@ -58,8 +58,13 @@ namespace LunchTime
                 Console.WriteLine("Megabytes is not open today.");
             }
             Console.WriteLine();
-            Console.WriteLine("Press enter to terminate...");
-            Console.ReadKey();
+            Console.Write("Press enter to terminate.");
+            int i = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
+            for (; i > 0; i--)
+            {
+                Console.Write(".");
+            }
+                Console.ReadKey();
         }
 
 

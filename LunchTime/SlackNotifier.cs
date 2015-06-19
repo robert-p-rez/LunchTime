@@ -38,25 +38,14 @@ namespace LunchTime
 
         private static void SendTextToSlack(string text)
         {
-            var connectionInfo = new SlackSettings();
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://hooks.slack.com/services/" + connectionInfo.URL);
+            string message = text + " is hungry!";
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://slack.com/api/chat.postMessage?token=test&channel=%23lunchtime&text=" + message + "&username=lunchbox&icon_emoji=%3Ahamburger%3A");
             httpWebRequest.ContentType = "text/json";
             httpWebRequest.Method = "POST";
 
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                string json = "{\"text\":\"" + text + " was hungry.\",\"username\": \"lunchbox\"}";
 
-                streamWriter.Write(json);
-                streamWriter.Flush();
-                streamWriter.Close();
-            }
-            
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-            }
+
         }
 
     }
