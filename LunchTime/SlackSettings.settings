@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="URL" Type="System.String" Scope="User">
-      <Value Profile="(Default)">T06FQC8ER/B06GPKLAD/r4oXe2ugNaA9ycWaAtplJhC5</Value>
+      <Value Profile="(Default)">hidden</Value>
     </Setting>
   </Settings>
 </SettingsFile>
