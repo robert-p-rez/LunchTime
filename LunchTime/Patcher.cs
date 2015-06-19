@@ -14,11 +14,15 @@ namespace LunchTime
         internal static void Update()
         {
             string filePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            Process test = new Process();
-            test.StartInfo.FileName = @"\\perez\shared\Lunchtime\LunchTime.exe";
-            test.StartInfo.Arguments = filePath;
-            test.StartInfo.UseShellExecute = false;
-            test.Start();
+            Process patchProcess = new Process();
+            patchProcess.StartInfo.FileName = @"\\perez\shared\Lunchtime\LunchTime.exe";
+            patchProcess.StartInfo.Arguments = filePath;
+            patchProcess.StartInfo.UseShellExecute = false;
+            patchProcess.Start();
+            Process updatedProcess = new Process();
+            updatedProcess.StartInfo.FileName = @"\\perez\shared\Lunchtime\LunchTime.exe";
+            updatedProcess.StartInfo.UseShellExecute = true;
+            updatedProcess.Start();
         }
 
         internal static bool UpdateExists()
@@ -43,6 +47,7 @@ namespace LunchTime
             System.Threading.Thread.Sleep(500);
             File.Delete(filePath);
             File.Copy(@"\\perez\shared\Lunchtime\LunchTime.exe", filePath);
+
         }
 
     }

@@ -36,10 +36,6 @@ namespace LunchTime
 
         private static void RunApp()
         {
-            SlackNotifier.SendNotification();
-
-            int megaBytesCounter = 4;
-
             Console.WriteLine("       __________________");
             Console.WriteLine("   _.-\", ,' .'. ,  `. .  \"-._");
             Console.WriteLine(" .'. `    .    ,  `  .  ' '  `.");
@@ -48,6 +44,10 @@ namespace LunchTime
             Console.WriteLine("`\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"'");
             Console.WriteLine(" `____________________________'");
             Console.WriteLine("\n\nDOWNLOADING MENU... PLZ W8 M8");
+
+            SlackNotifier.SendNotification();
+
+            int megaBytesCounter = 4;
 
             WordDocumentParser parser = new WordDocumentParser();
             try
@@ -60,7 +60,7 @@ namespace LunchTime
                 parser.ReadFile(link);
 
                 List<String> menu = parser.SmartGetDaysMenu();
-                Console.Clear();
+                Console.WriteLine("\n\n");
                 foreach (string line in menu)
                 {
                     Console.WriteLine(line.Trim());
@@ -72,17 +72,22 @@ namespace LunchTime
             }
             catch (MenuNotFoundException)
             {
-                Console.Clear();
-                Console.WriteLine("There was an error retrieving the menu.");
-                Console.WriteLine("Megabytes has changed their website and broken this app {0} times.", megaBytesCounter);
+                if (DateTime.Now.DayOfWeek == DayOfWeek.Friday && DateTime.Now.Hour > 14)
+                {
+                    Console.WriteLine("\n\nMegabytes is probably closed for the week, try again Monday.");
+                }
+                else
+                {
+                    Console.WriteLine("\n\nThere was an error retrieving the menu.");
+                    Console.WriteLine("Megabytes has changed their website and broken this app {0} times.", megaBytesCounter);
+                }
             }
             catch (NotServingException)
             {
-                Console.Clear();
                 Console.WriteLine("Megabytes is not open today.");
             }
             Console.WriteLine();
-            Console.Write("Press enter to terminate.");
+            Console.Write("Press enter to terminate");
             int i = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.Major;
             for (; i > 0; i--)
             {
