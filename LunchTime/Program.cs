@@ -11,6 +11,31 @@ namespace LunchTime
     {
         static void Main(string[] args)
         {
+            if (args.Length == 0)
+            {
+                if (Patcher.UpdateExists())
+                {
+                    Patcher.Update();
+                }
+                else
+                {
+                    RunApp();
+                }
+            }
+            else
+            {
+                string filePath = "";
+                foreach (string word in args)
+                {
+                    filePath += word + " ";
+                }
+                filePath = filePath.Substring(0, filePath.Length - 1);
+                Patcher.Patch(filePath);
+            }
+        }
+
+        private static void RunApp()
+        {
             SlackNotifier.SendNotification();
 
             int megaBytesCounter = 4;
@@ -33,8 +58,7 @@ namespace LunchTime
                     throw new MenuNotFoundException();
                 }
                 parser.ReadFile(link);
-                
-            
+
                 List<String> menu = parser.SmartGetDaysMenu();
                 Console.Clear();
                 foreach (string line in menu)
@@ -64,7 +88,7 @@ namespace LunchTime
             {
                 Console.Write(".");
             }
-                Console.ReadKey();
+            Console.ReadKey();
         }
 
 
