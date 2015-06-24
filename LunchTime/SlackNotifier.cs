@@ -16,19 +16,28 @@ namespace LunchTime
         {
             try
             {
-                SendTextToSlack(GetCurrentUser());
+                SendTextToSlack(GetCurrentUser()+ " is hungry!!");
             }
             catch
             {
                 try
                 {
-                    SendTextToSlack("Someone used lunchtime!");
+                    SendTextToSlack("Someone used lunchtime!!");
                 }
                 catch
                 {
                     //really bad failure :(
                 }
             }
+        }
+
+        internal static void LogTrouble()
+        {
+            try
+            {
+                SendTextToSlack(GetCurrentUser() + " had trouble using lunchtime.");
+            }
+            catch { }
         }
 
         private static string GetCurrentUser()
@@ -38,8 +47,7 @@ namespace LunchTime
 
         private static void SendTextToSlack(string text)
         {
-            string message = text + " is hungry!";
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://slack.com/api/chat.postMessage?token=test&channel=%23lunchtime&text=" + message + "&username=lunchbox&icon_emoji=%3Ahamburger%3A");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://slack.com/api/chat.postMessage?token=test&channel=%23lunchtime&text=" + text + "&username=lunchbox&icon_emoji=%3Ahamburger%3A");
             httpWebRequest.ContentType = "text/json";
             httpWebRequest.Method = "POST";
 
