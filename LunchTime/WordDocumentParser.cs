@@ -130,14 +130,14 @@ namespace LunchTime
             int minute = System.DateTime.Now.Minute;
 
             List<string> menu;
-            if (hour > 14 || (hour == 13 && minute >= 35))
+            if (hour > 14 || (hour == 14 && minute >= 35))
             {
                 menu = GetDaysMenu(DateTime.Now.AddHours(14).DayOfWeek);
             }
             else
             {
                 menu = GetDaysMenu(DateTime.Now.DayOfWeek);
-                if (hour == 13 && minute > 5)
+                if (hour == 13 && minute > 1)
                 {
                     StripClosedStations(ref menu);
                 }

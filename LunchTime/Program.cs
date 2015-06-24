@@ -45,7 +45,7 @@ namespace LunchTime
             Console.WriteLine(" `____________________________'");
             Console.WriteLine("\n\nDOWNLOADING MENU... PLZ W8 M8");
 
-            SlackNotifier.SendNotification();
+           SlackNotifier.SendNotification();
 
             int megaBytesCounter = 4;
 

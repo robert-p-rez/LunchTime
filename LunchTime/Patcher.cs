@@ -38,7 +38,7 @@ namespace LunchTime
                 }
             }
             catch { }
-            
+
             return false;
         }
 
@@ -47,7 +47,13 @@ namespace LunchTime
             System.Threading.Thread.Sleep(500);
             File.Delete(filePath);
             File.Copy(@"\\perez\shared\Lunchtime\LunchTime.exe", filePath);
+        }
 
+        internal static int VersionNumber()
+        {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo thisVersion = FileVersionInfo.GetVersionInfo(assembly.Location);
+            return thisVersion.FileMajorPart;
         }
 
     }
