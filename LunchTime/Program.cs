@@ -55,6 +55,10 @@ namespace LunchTime
                 string link = IntergraphFileCreator.CurrentWeekFile();
                 if (string.IsNullOrWhiteSpace(link))
                 {
+                    if (IntergraphFileCreator.LastWeekFileStillExists())
+                    {
+                        throw new OldMenuException();
+                    }
                     throw new MenuNotFoundException();
                 }
                 parser.ReadFile(link);
@@ -85,6 +89,10 @@ namespace LunchTime
             catch (NotServingException)
             {
                 Console.WriteLine("Megabytes is not open today.");
+            }
+            catch (OldMenuException)
+            {
+                Console.WriteLine("\n\nThe menu has not been updated for this current week,\n rumor has it the front desk has the menu.");
             }
             Console.WriteLine();
             Console.Write("Press enter to terminate");

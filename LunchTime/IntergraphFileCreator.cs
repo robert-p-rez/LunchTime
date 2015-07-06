@@ -14,46 +14,53 @@ namespace LunchTime
         //Should return filepath like "http://305.intergraph.com/wp-content/uploads/2015/05/Megabytes-5-24-15.docx" based on the current date
         public static string CurrentWeekFile()
         {
-            return ParseHTMLLink();
+            return ParseHTMLLink(DateTime.Now);
+        }
+
+        internal static bool LastWeekFileStillExists()
+        {
+            if (string.IsNullOrWhiteSpace(ParseHTMLLink(DateTime.Now.AddDays(-7))))
+            {
+                return false;
+            }
+            return true;
         }
 
         private static string FilePath()
         {
-            string filePath = MakeDate();
+            string filePath = MakeDate(DateTime.Now);
             return filePath.Substring(filePath.LastIndexOf("/"));
         }
 
-        private static string MakeDate()
+        private static string MakeDate(DateTime dateToUse)
         {
-           // string output = 
-            DateTime today = DateTime.Now;
-            switch (today.DayOfWeek)
+            switch (dateToUse.DayOfWeek)
             {
                 case DayOfWeek.Saturday:
                 case DayOfWeek.Sunday:
                     throw new NotServingException();
                 case DayOfWeek.Friday:
-                    today = today.AddDays(+2);
+                    dateToUse = dateToUse.AddDays(+2);
                     break;
                 case DayOfWeek.Thursday:
-                    today = today.AddDays(+3);
+                    dateToUse = dateToUse.AddDays(+3);
                     break;
                 case DayOfWeek.Wednesday:
-                    today = today.AddDays(+4);
+                    dateToUse = dateToUse.AddDays(+4);
                     break;
                 case DayOfWeek.Tuesday:
-                    today = today.AddDays(+5);
+                    dateToUse = dateToUse.AddDays(+5);
                     break;
                 case DayOfWeek.Monday:
-                    today = today.AddDays(+6);
+                    dateToUse = dateToUse.AddDays(+6);
                     break;
                 default:
                     break;
             }
-            return "http://305.intergraph.com/wp-content/uploads/2015/06/Megabytes-" + today.Month.ToString() + "-" + today.Day.ToString() + "-" + today.Year.ToString().Remove(0, 2)+ ".docx";;
+            return "http://305.intergraph.com/wp-content/uploads/2015/06/Megabytes-" + dateToUse.Month.ToString() + "-" + dateToUse.Day.ToString() + "-" + dateToUse.Year.ToString().Remove(0, 2) + ".docx"; ;
         }
 
-        private static string ParseHTMLLink()
+        private static string ParseHTMLLink(DateTime dateToUse)
         {
             WebRequest req = HttpWebRequest.Create("http://305.intergraph.com/?page_id=796");
             req.Method = "GET";
@@ -65,14 +72,15 @@ namespace LunchTime
                     html = reader.ReadToEnd();
                 }
             }
-            catch {
-                return MakeDate();
+            catch
+            {
+                return MakeDate(dateToUse);
             }
 
             foreach (string item in html.Split('\"'))
             {
                 if (item.Contains("Megabytes") && item.Contains("http://305.intergraph.com/wp-content"))
-                    if (MakeDate() == item)
+                    if (MakeDate(dateToUse) == item)
                     {
                         return item;
                     }
