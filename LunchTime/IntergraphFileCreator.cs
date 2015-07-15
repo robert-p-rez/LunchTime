@@ -26,12 +26,6 @@ namespace LunchTime
             return true;
         }
 
-        private static string FilePath()
-        {
-            string filePath = MakeDate(DateTime.Now);
-            return filePath.Substring(filePath.LastIndexOf("/"));
-        }
-
         private static string MakeDate(DateTime dateToUse)
         {
             switch (dateToUse.DayOfWeek)
@@ -57,7 +51,7 @@ namespace LunchTime
                 default:
                     break;
             }
-            return "http://305.intergraph.com/wp-content/uploads/2015/06/Megabytes-" + dateToUse.Month.ToString() + "-" + dateToUse.Day.ToString() + "-" + dateToUse.Year.ToString().Remove(0, 2) + ".docx"; ;
+            return "http://305.intergraph.com/wp-content/uploads/2015/0"+dateToUse.Month.ToString()+"/Megabytes-" + dateToUse.Month.ToString() + "-" + dateToUse.Day.ToString() + "-" + dateToUse.Year.ToString().Remove(0, 2) + ".docx"; ;
         }
 
         private static string ParseHTMLLink(DateTime dateToUse)
@@ -80,12 +74,17 @@ namespace LunchTime
             foreach (string item in html.Split('\"'))
             {
                 if (item.Contains("Megabytes") && item.Contains("http://305.intergraph.com/wp-content"))
-                    if (MakeDate(dateToUse) == item)
+                    if (item.EndsWith(FileName(dateToUse)))
                     {
                         return item;
                     }
             }
             return "";
+        }
+
+        private static string FileName(DateTime dateToUse)
+        {
+            return Path.GetFileName(MakeDate(dateToUse));
         }
     }
 }
