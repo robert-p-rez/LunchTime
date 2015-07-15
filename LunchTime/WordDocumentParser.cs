@@ -29,7 +29,10 @@ namespace LunchTime
                 ParseWithWord(filePath);
             }
         }
- 
+
+        /// <summary>
+        /// Parses the users temp folder for the cached menu.
+        /// </summary>
         private void ParseCache()
         {
             StreamReader reader = new StreamReader(Path.GetTempPath() + "LunchTimeMenu.txt");
@@ -41,9 +44,12 @@ namespace LunchTime
             reader.Close();
         }
 
+        /// <summary>
+        /// If no cache was found then we have to parse the document with Word.
+        /// </summary>
         private void ParseWithWord(string filePath)
         {
-            StreamWriter writer = new StreamWriter(Path.GetTempPath() + @"LunchTimeMenu.txt");
+            StreamWriter writer = new StreamWriter(Path.GetTempPath() + "LunchTimeMenu.txt");
             writer.WriteLine(filePath);
             _Application word = new Application();
             _Document doc = null;
@@ -76,6 +82,9 @@ namespace LunchTime
             }
         }
 
+        /// <summary>
+        /// Returns true if the user has the correct cached menu in their temp folder.
+        /// </summary>
         private bool DoesCurrentCacheExist(string filepath)
         {
             bool exists = false;
@@ -96,6 +105,9 @@ namespace LunchTime
             return fileText;
         }
 
+        /// <summary>
+        /// Returns the menu for a specific day.
+        /// </summary>
         public List<string> GetDaysMenu(DayOfWeek theDate)
         {
             if (theDate == DayOfWeek.Sunday || theDate == DayOfWeek.Saturday)
@@ -124,6 +136,9 @@ namespace LunchTime
             return lines;
         }
 
+        /// <summary>
+        /// Returns the menu for today if megabytes is open or is yet to open, the menu for tomorrow is returned otherwise.
+        /// </summary>
         public List<string> SmartGetDaysMenu()
         {
             int hour = System.DateTime.Now.Hour;
@@ -146,6 +161,9 @@ namespace LunchTime
             return menu;
         }
 
+        /// <summary>
+        /// This should remove the closed food stations because expo and deli close earlier than the others.
+        /// </summary>
         private void StripClosedStations(ref List<String> menu)
         {
             for (int i = 0; i < menu.Count; i++)
@@ -158,6 +176,10 @@ namespace LunchTime
             }
         }
 
+        /// <summary>
+        /// Returns true if the string line contains a day of the week.
+        /// Used to determine the end and beginning of daily menus.
+        /// </summary>
         private bool LineContainsAnotherDay(string line, DayOfWeek dayToNotCheckFor)
         {
             foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))

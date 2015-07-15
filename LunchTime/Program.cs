@@ -31,17 +31,6 @@ namespace LunchTime
             }
         }
 
-        private static string ConstructFilePath(string[] args)
-        {
-            string filePath = "";
-            foreach (string word in args)
-            {
-                filePath += word + " ";
-            }
-            filePath = filePath.Substring(0, filePath.Length - 1);
-            return filePath;
-        }
-
         private static void RunApp()
         {
             MakeBurger();
@@ -68,6 +57,9 @@ namespace LunchTime
             TerminateLunchTime();
         }
 
+        /// <summary>
+        /// The actual workflow to parse the menu.
+        /// </summary>
         private static void OutputMenu()
         {
             WordDocumentParser parser = new WordDocumentParser();
@@ -108,6 +100,9 @@ namespace LunchTime
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Exception handling for after Megabytes closes and before Monday. Or if the website changes.
+        /// </summary>
         private static void HandleMenuNotFoundException()
         {
             if (DateTime.Now.DayOfWeek == DayOfWeek.Friday && DateTime.Now.Hour > 14)
@@ -121,6 +116,9 @@ namespace LunchTime
             }
         }
 
+        /// <summary>
+        /// ASCII burger.
+        /// </summary>
         private static void MakeBurger()
         {
             Console.WriteLine("       __________________");
@@ -133,6 +131,18 @@ namespace LunchTime
             Console.WriteLine("\n\nDOWNLOADING MENU... PLZ W8 M8");
         }
 
-
+        /// <summary>
+        /// Constructs one string from the filepath passed in by command line arguments. (The location of the exe a user is running)
+        /// </summary>
+        private static string ConstructFilePath(string[] args)
+        {
+            string filePath = "";
+            foreach (string word in args)
+            {
+                filePath += word + " ";
+            }
+            filePath = filePath.Substring(0, filePath.Length - 1);
+            return filePath;
+        }
     }
 }
