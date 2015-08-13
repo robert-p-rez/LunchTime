@@ -1,17 +1,29 @@
-﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:telerikDocking="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Docking" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="LunchTimeGui.MainWindow"
-        Title="Lunchtime" Height="400" Width="525">
-    <Grid KeyDown="UIElement_OnKeyDown">
-
-
-
-        <telerik:RadTabControl Name="RadTabControl" KeyDown="RadTabControl_OnKeyDown"  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding Panes}" >
-          
-        </telerik:RadTabControl>
-
-
-
-    </Grid>
-</Window>
+﻿<uxt:UxtWindow 
+    x:Class="LunchTimeGui.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:uxt="clr-namespace:Intergraph.UX.WPF.Toolkit;assembly=Intergraph.UX.WPF.Toolkit"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:local="clr-namespace:LunchTimeGui"
+    Style="{DynamicResource MainWindowStyle}"
+    uxt:BrandingBehavior.ProductFamily="{Binding ProductFamily}"
+    WindowStartupLocation="CenterScreen"
+    Title="MainWindow" 
+	Height="350" Width="525">
+    <uxt:UxtWindow.DataContext>
+        <local:MainWindowViewModel/>
+    </uxt:UxtWindow.DataContext>
+    <uxt:UxtWindowContent
+        Style="{DynamicResource MainWindowContentStyle}"
+        ScreenTitle="LunchTime"
+        MenuType="None"
+        ProductName="{Binding Name}">
+      
+        <uxt:UxtWindowContent.Content>
+            <Grid>
+                <telerik:RadTabControl HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" ItemsSource="{Binding Panes}" />
+            </Grid>
+        </uxt:UxtWindowContent.Content>
+      
+    </uxt:UxtWindowContent>
+</uxt:UxtWindow>

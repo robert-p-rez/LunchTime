@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LunchTimeGui.Properties
+namespace Uxt2BasicSample.Properties
 {
 
 

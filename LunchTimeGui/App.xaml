@@ -1,8 +1,22 @@
-﻿<Application x:Class="LunchTimeGui.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="MainWindow.xaml">
+﻿<Application 
+    x:Class="LunchTimeGui.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Intergraph.UX.WPF.Toolkit;component/Themes/Intergraph.UX.WPF.Toolkit.xaml"/>
+                <ResourceDictionary Source="/Intergraph.UX.WPF.Toolkit;component/Themes/System.Windows.xaml"/>
+                <ResourceDictionary Source="/Intergraph.UX.WPF.Toolkit;component/Themes/Telerik.Windows.Controls.xaml"/>
+                <ResourceDictionary Source="/Intergraph.UX.WPF.Toolkit;component/Themes/Telerik.Windows.Controls.Input.xaml"/>
+                <ResourceDictionary Source="/Intergraph.UX.WPF.Toolkit;component/Themes/Telerik.Windows.Controls.Navigation.xaml"/>
+                <ResourceDictionary Source="/Intergraph.UX.WPF.Toolkit;component/Themes/Telerik.Windows.Controls.RibbonView.xaml"/>
+                <ResourceDictionary Source="/Intergraph.UX.WPF.Toolkit;component/Themes/Telerik.Windows.Controls.Docking.xaml"/> 
+                <ResourceDictionary Source="/Intergraph.UX.WPF.Toolkit;component/Themes/Telerik.Windows.Controls.Data.xaml"/> 
+                <ResourceDictionary Source="/Intergraph.UX.WPF.Toolkit;component/Themes/Telerik.Windows.Controls.GridView.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

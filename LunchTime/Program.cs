@@ -22,7 +22,7 @@ namespace LunchTime
                 }
                 else
                 {
-                    if (new Random().Next(10) > 8 &! GUIExists())
+                    if (!GUIExists())
                     {
                     RunApp();
                     }
