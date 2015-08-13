@@ -30,6 +30,11 @@ namespace LunchTime
             }
         }
 
+        public void ReadFile()
+        {
+            ReadFile(IntergraphFileCreator.CurrentWeekFile());
+        }
+
         /// <summary>
         /// Parses the users temp folder for the cached menu.
         /// </summary>

@@ -15,17 +15,17 @@ namespace LunchTime
         /// <summary>
         /// Send an update about hunger to slack.
         /// </summary>
-        internal static void SendNotification()
+        internal static void SendNotification(string addition = "")
         {
             try
             {
-                SendTextToSlack(GetCurrentUser()+ " is hungry! v"+ Patcher.VersionNumber());
+                SendTextToSlack(GetCurrentUser()+ " is hungry! v"+ Patcher.VersionNumber()+addition);
             }
             catch
             {
                 try
                 {
-                    SendTextToSlack("Someone used lunchtime! v" + Patcher.VersionNumber());
+                    SendTextToSlack("Someone used lunchtime! v" + Patcher.VersionNumber()+addition);
                 }
                 catch
                 {

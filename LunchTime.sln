@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunchTime", "LunchTime\LunchTime.csproj", "{3C2E0D9A-067B-40E5-A8FC-D442ACFC16E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunchTimeGui", "LunchTimeGui\LunchTimeGui.csproj", "{949875B7-8171-49E8-BE3A-CCA185E9D3A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,8 +15,14 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{3C2E0D9A-067B-40E5-A8FC-D442ACFC16E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C2E0D9A-067B-40E5-A8FC-D442ACFC16E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2E0D9A-067B-40E5-A8FC-D442ACFC16E4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{3C2E0D9A-067B-40E5-A8FC-D442ACFC16E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C2E0D9A-067B-40E5-A8FC-D442ACFC16E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{949875B7-8171-49E8-BE3A-CCA185E9D3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{949875B7-8171-49E8-BE3A-CCA185E9D3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{949875B7-8171-49E8-BE3A-CCA185E9D3A0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{949875B7-8171-49E8-BE3A-CCA185E9D3A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{949875B7-8171-49E8-BE3A-CCA185E9D3A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

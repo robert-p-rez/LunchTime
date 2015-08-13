@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,14 @@ namespace LunchTime
                 }
                 else
                 {
+                    if (new Random().Next(10) > 8 &! GUIExists())
+                    {
                     RunApp();
+                    }
+                    else
+                    {
+                        SlackNotifier.SendNotification("G");
+                    }
                 }
             }
             else
@@ -31,11 +39,25 @@ namespace LunchTime
             }
         }
 
+        private static bool GUIExists()
+        {
+            string NetworkLocation = @"\\perez\shared\Lunchtime\GUI\LunchTimeGui.exe";
+            if (File.Exists(NetworkLocation))
+            {
+                Process GUIProcess = new Process();
+                GUIProcess.StartInfo.FileName = NetworkLocation;
+                GUIProcess.StartInfo.UseShellExecute = false;
+                GUIProcess.Start();
+                return true;
+            }
+            return false;
+        }
+
         private static void RunApp()
         {
             MakeBurger();
 
-            SlackNotifier.SendNotification();
+          //  SlackNotifier.SendNotification();
 
             try
             {
