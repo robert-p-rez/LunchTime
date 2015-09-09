@@ -63,7 +63,7 @@ namespace LunchTime
                 default:
                     break;
             }
-            return "http://305.intergraph.com/wp-content/uploads/"+dateToUse.Year.ToString()+"/0"+(dateToUse.Month.ToString().Length == 1 ? "0":"") + dateToUse.Month.ToString()  +"/Megabytes-" + dateToUse.Month.ToString() + "-" + dateToUse.Day.ToString() + "-" + dateToUse.Year.ToString().Remove(0, 2) + ".docx";
+            return "http://305.intergraph.com/wp-content/uploads/"+dateToUse.Year.ToString()+"/0"+(dateToUse.Month.ToString().Length == 1 ? "0":"") + dateToUse.Month.ToString()  +"/Megabytes-" + dateToUse.Month.ToString() + "-" + dateToUse.Day.ToString() + "-" + dateToUse.Year.ToString().Remove(0, 2) + ".pdf";
         }
 
         /// <summary>

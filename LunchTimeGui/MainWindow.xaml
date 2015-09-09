@@ -8,7 +8,7 @@
     Style="{DynamicResource MainWindowStyle}"
     uxt:BrandingBehavior.ProductFamily="{Binding ProductFamily}"
     WindowStartupLocation="CenterScreen"
-    Title="MainWindow" 
+    Title="LunchTime" 
 	Height="350" Width="525">
     <uxt:UxtWindow.DataContext>
         <local:MainWindowViewModel/>
@@ -17,7 +17,8 @@
         Style="{DynamicResource MainWindowContentStyle}"
         ScreenTitle="LunchTime"
         MenuType="None"
-        ProductName="{Binding Name}">
+        ProductName="{Binding Name}"
+        >
       
         <uxt:UxtWindowContent.Content>
             <Grid>

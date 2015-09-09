@@ -22,14 +22,9 @@ namespace LunchTime
                 }
                 else
                 {
-                    if (!GUIExists())
-                    {
-                    RunApp();
-                    }
-                    else
-                    {
-                        SlackNotifier.SendNotification("G");
-                    }
+                    SlackNotifier.SendNotification();
+                  var menu =  IntergraphFileCreator.CurrentWeekFile();
+            System.Diagnostics.Process.Start(menu);
                 }
             }
             else
@@ -57,8 +52,7 @@ namespace LunchTime
         {
             MakeBurger();
 
-          //  SlackNotifier.SendNotification();
-
+            SlackNotifier.SendNotification();
             try
             {
                 OutputMenu();
