@@ -103,7 +103,7 @@ namespace LunchTime
         /// </summary>
         private static string FileName(DateTime dateToUse)
         {
-            return Path.GetFileName(MakeDate(dateToUse));
+            return Path.GetFileName(MakeDate(dateToUse)).Substring(10);
         }
     }
 }
